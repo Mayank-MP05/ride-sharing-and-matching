@@ -1,6 +1,7 @@
 package com.example.geektrust.models;
 
 import com.example.geektrust.utils.DriverStatus;
+import com.example.geektrust.utils.RideStatus;
 
 public class Driver {
     private String driverId;
@@ -16,7 +17,10 @@ public class Driver {
         this.driverCurrentStatus = DriverStatus.AVAILABLE;
     }
 
-    public void updateDriverStatus(DriverStatus updateStatus){
-        this.driverCurrentStatus = updateStatus;
+    public void stopRide( Integer destXCord, Integer destYCord ){
+        this.driverCurrentStatus = DriverStatus.AVAILABLE;
+        this.xCord = destXCord;
+        this.yCord = destYCord;
     }
+
 }

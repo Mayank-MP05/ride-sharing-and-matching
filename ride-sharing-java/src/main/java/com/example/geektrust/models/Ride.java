@@ -10,6 +10,15 @@ public class Ride {
     private Integer endingYCord;
 
     private String rideDriverId;
+
+    public String getRideDriverId() {
+        return rideDriverId;
+    }
+
+    public String getRideRiderId() {
+        return rideRiderId;
+    }
+
     private String rideRiderId;
 
     private Integer timeTaken;
@@ -34,6 +43,14 @@ public class Ride {
         this.endingYCord = destinationYCord;
 
         this.timeTaken = timeTaken;
+    }
+
+    public RideStatus getCurrentRideStatus() {
+        return currentRideStatus;
+    }
+
+    public void setCurrentRideStatus(RideStatus currentRideStatus) {
+        this.currentRideStatus = currentRideStatus;
     }
 
     /**

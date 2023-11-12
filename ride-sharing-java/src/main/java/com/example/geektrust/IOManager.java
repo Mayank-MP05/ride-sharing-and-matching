@@ -12,6 +12,7 @@ import com.example.geektrust.models.Rider;
 
 import com.example.geektrust.utils.Constants;
 import com.example.geektrust.utils.Logger;
+import com.example.geektrust.utils.RideStatus;
 
 public class IOManager {
     private DriversDatabase driversDb;
@@ -82,6 +83,23 @@ public class IOManager {
     }
 
     private void stopRideCommand(String rideId, Integer destXCord, Integer destYCord, Integer timeTaken) {
+        // DOCS: Checking if rideId do not exist case
+        if(!ridesDb.isExists(rideId)){
+            logger.log("INVALID_RIDE");
+            return;
+        }
+
+        // DOCS: Ride already stopped case
+        Ride rideObj = ridesDb.getRideById(rideId);
+        if(rideObj.getCurrentRideStatus() == RideStatus.STOP){
+            logger.log("INVALID_RIDE");
+            return;
+        }
+
+        rideObj.setCurrentRideStatus(RideStatus.STOP);
+        Driver driverObj = driversDb.getDriverById(rideObj.getRideDriverId());
+        driverObj.stopRide(destXCord,destYCord );
+        rideObj.stopRide(destXCord,destYCord,timeTaken);
     }
 
     private void startRideCommand(String rideId, Integer matchNumToAccept, String riderId) {

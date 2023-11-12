@@ -7,7 +7,7 @@ public class Logger {
      * @param printThis
      */
     public void debug(Object printThis){
-        if(Constants.DEBUGo_MODE) {
+        if(Constants.DEBUG_MODE) {
             System.out.println(printThis);
         }
     }
