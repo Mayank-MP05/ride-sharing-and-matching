@@ -16,5 +16,7 @@ public class Driver {
         this.driverCurrentStatus = DriverStatus.AVAILABLE;
     }
 
-
+    public void updateDriverStatus(DriverStatus updateStatus){
+        this.driverCurrentStatus = updateStatus;
+    }
 }
