@@ -120,6 +120,8 @@ public class IOManager {
         Driver driverObj = driversDb.getDriverById(rideObj.getRideDriverId());
         driverObj.stopRide(destXCord,destYCord );
         rideObj.stopRide(destXCord,destYCord,timeTaken);
+
+        logger.log("RIDE_STOPPED "+rideId);
     }
 
     private void startRideCommand(String rideId, Integer matchNumToAccept, String riderId) {
