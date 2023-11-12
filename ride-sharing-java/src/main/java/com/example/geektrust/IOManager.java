@@ -1,13 +1,31 @@
 package com.example.geektrust;
 
+// Database imports
+import com.example.geektrust.database.DriversDatabase;
+import com.example.geektrust.database.RidersDatabase;
+import com.example.geektrust.database.RidesDatabase;
+
+// Model imports
+import com.example.geektrust.models.Driver;
+import com.example.geektrust.models.Ride;
+import com.example.geektrust.models.Rider;
+
 import com.example.geektrust.utils.Constants;
 
 public class IOManager {
+    private DriversDatabase driversDb;
+    private RidersDatabase ridersDb;
+    private RidesDatabase ridesDb;
+
+
     public IOManager() {
         System.out.println("[INIT] IOManager");
+        driversDb = new DriversDatabase();
+        ridersDb = new RidersDatabase();
+        ridesDb = new RidesDatabase();
     }
 
-    public static void processInputLine(String inputLine){
+    public void processInputLine(String inputLine){
         String[] tokensList;
         String commandToken;
         String riderId, driverId, rideId;
@@ -57,24 +75,23 @@ public class IOManager {
         }
     }
 
-    private static void billCommand(String rideId) {
+    private void billCommand(String rideId) {
     }
 
-    private static void stopRideCommand(String rideId, Integer destXCord, Integer destYCord, Integer timeTaken) {
+    private void stopRideCommand(String rideId, Integer destXCord, Integer destYCord, Integer timeTaken) {
     }
 
-    private static void startRideCommand(String rideId, Integer matchNumToAccept, String riderId) {
+    private void startRideCommand(String rideId, Integer matchNumToAccept, String riderId) {
     }
 
-    private static void matchCommand(String riderId) {
+    private void matchCommand(String riderId) {
     }
 
-    private static void addRiderCommand(String riderId, Integer xCord, Integer yCord) {
+    private void addRiderCommand(String riderId, Integer xCord, Integer yCord) {
     }
 
-    public static void addDriverCommand(String driverId,Integer xCord,Integer yCord){
-
+    public void addDriverCommand(String driverId, Integer xCord, Integer yCord){
+        Driver driverObj = new Driver(driverId, xCord, yCord);
+        driversDb.putDriverById(driverId,driverObj);
     }
-
-
 }
