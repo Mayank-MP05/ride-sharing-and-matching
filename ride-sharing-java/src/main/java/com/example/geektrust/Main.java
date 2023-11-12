@@ -2,22 +2,26 @@ package com.example.geektrust;
 
 import com.example.geektrust.utils.Constants;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        /*
-        Sample code to read from file passed as command line argument
+        // DOCS: Sample code to read from file passed as command line argument
         try {
             // the file to be opened for reading
-            FileInputStream fis = new FileInputStream(args[0]);
+            FileInputStream fis = new FileInputStream("sample_input/input1.txt");
             Scanner sc = new Scanner(fis); // file to be scanned
             // returns true if there is another line to read
             while (sc.hasNextLine()) {
-               //Add your code here to process input commands
+                String inputLine = sc.nextLine();
+                System.out.println(inputLine);
             }
             sc.close(); // closes the scanner
-        } catch (IOException e) {
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("IOException e");
         }
-        */
-        System.out.println("Problem solved by" + Constants.solvedBy);
     }
 }
