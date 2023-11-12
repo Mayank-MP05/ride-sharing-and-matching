@@ -16,5 +16,6 @@ public class Main {
         } catch (IOException e) {
         }
         */
+        System.out.println("This is where I start seriously writing production grade java");
     }
 }
