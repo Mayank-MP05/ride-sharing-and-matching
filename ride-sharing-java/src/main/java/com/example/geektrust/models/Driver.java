@@ -13,6 +13,11 @@ public class Driver {
         return driverId;
     }
 
+    public double getDriverIdDouble(){
+        String _driverId = this.driverId.replace("D","");
+        return Double.parseDouble(_driverId);
+    }
+
     public Driver(String driverId, Integer xCord, Integer yCord) {
         this.driverId = driverId;
         this.xCord = xCord;
@@ -36,6 +41,12 @@ public class Driver {
         double sumOfSquares = xCordDelta*xCordDelta + yCordDelta*yCordDelta;
 
         double euclideanDistance = Math.sqrt(sumOfSquares);
+        /*
+        System.out.println("xCord: "+xCord);
+        System.out.println("yCord: "+yCord);
+        System.out.println("id: "+driverId);
+        System.out.println("euclideanDistance: "+euclideanDistance);
+        */
         this.distanceFromRider = euclideanDistance;
     }
 

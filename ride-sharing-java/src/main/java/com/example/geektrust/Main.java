@@ -17,7 +17,7 @@ public class Main {
         IOManager ioManager = new IOManager();
         try {
             // FIXME: Later on change this to args[0]
-            String inputFileToRead = "sample_input/input1.txt";
+            String inputFileToRead = "sample_input/input2.txt";
             FileInputStream fis = new FileInputStream(inputFileToRead);
             Scanner sc = new Scanner(fis); // file to be scanned
             while (sc.hasNextLine()) {

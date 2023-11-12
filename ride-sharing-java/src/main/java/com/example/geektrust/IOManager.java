@@ -147,10 +147,10 @@ public class IOManager {
         // DOCS: Iterate over available drivers, pick only in Match radius area
         ArrayList<Driver> availableDrivers = driversDb.getAvailableDrivers();
         Rider riderObj = ridersDb.getRiderById(riderId);
-        PriorityQueue<Driver> driverQueueIncreasing = new PriorityQueue<>(Comparator.comparingDouble(Driver::getDistanceFromRider));
+        PriorityQueue<Driver> driverQueueIncreasing = new PriorityQueue<>(Comparator.comparingDouble(Driver::getDistanceFromRider).thenComparingDouble(Driver::getDriverIdDouble));
         for(Driver driverObj: availableDrivers){
             driverObj.calculateDistanceFromRider(riderObj.getXCord(), riderObj.getYCord());
-            if(driverObj.getDistanceFromRider() < Constants.MATCH_RADIUS){
+            if(driverObj.getDistanceFromRider() <= Constants.MATCH_RADIUS){
                 driverQueueIncreasing.add(driverObj);
             }
         }
@@ -170,11 +170,12 @@ public class IOManager {
                 break;
             }
         }
-        logger.log("DRIVERS_MATCHED ");
-        for(String driverId : matchArrToUpdate){
-            logger.log(driverId+" ");
-        }
 
+        String driverIdsToPrint = "";
+        for(String driverId : matchArrToUpdate){
+            driverIdsToPrint += driverId + " ";
+        }
+        logger.log("DRIVERS_MATCHED "+driverIdsToPrint);
         riderObj.setDriverIdMatches(matchArrToUpdate);
     }
 
