@@ -1,27 +1,36 @@
 package com.example.geektrust;
 
 import com.example.geektrust.utils.Constants;
+import com.example.geektrust.IOManager;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Main {
+    public void Main() {
+        System.out.println("constructor call");
+    }
     public static void main(String[] args) {
-        // DOCS: Sample code to read from file passed as command line argument
+        IOManager ioManager = new IOManager();
         try {
-            // the file to be opened for reading
-            FileInputStream fis = new FileInputStream("sample_input/input1.txt");
+            // FIXME: Later on change this to args[0]
+            String inputFileToRead = "sample_input/input1.txt";
+            FileInputStream fis = new FileInputStream(inputFileToRead);
             Scanner sc = new Scanner(fis); // file to be scanned
-            // returns true if there is another line to read
             while (sc.hasNextLine()) {
                 String inputLine = sc.nextLine();
-                System.out.println(inputLine);
+                ioManager.processInputLine(inputLine);
             }
             sc.close(); // closes the scanner
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.out.println("IOException: Error reading input file");
             System.out.println(e);
-            System.out.println("IOException e");
+        } catch (Exception e){
+            System.out.println("Undetected exception");
+            System.out.println(e);
         }
     }
 }
