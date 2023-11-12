@@ -35,9 +35,12 @@ public class Ride {
         this.rideId = rideId;
     }
 
-    public void startRide(String rideRiderId, String rideDriverId){
+    public void startRide(String rideRiderId, String rideDriverId, Integer startingXCord, Integer startingYCord){
         this.rideDriverId = rideDriverId;
         this.rideRiderId = rideRiderId;
+
+        this.startingXCord = startingXCord;
+        this.startingYCord = startingYCord;
 
         this.currentRideStatus = RideStatus.START;
     }

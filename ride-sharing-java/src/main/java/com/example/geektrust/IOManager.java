@@ -137,7 +137,8 @@ public class IOManager {
 
         Ride newRide = new Ride(rideId);
         String driverId = riderObj.getDriverId(matchNumToAccept);
-        newRide.startRide(riderId,driverId);
+        newRide.startRide(riderId,driverId,riderObj.getXCord(), riderObj.getYCord());
+        ridesDb.putRideById(rideId, newRide);
 
         logger.log("RIDE_STARTED " + rideId);
     }
