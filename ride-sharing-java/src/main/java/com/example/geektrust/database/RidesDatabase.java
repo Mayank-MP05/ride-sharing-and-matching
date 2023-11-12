@@ -19,4 +19,16 @@ public class RidesDatabase {
     public Ride getRideById(String rideId){
         return allRidesDb.get(rideId);
     }
+
+    /**
+     * True or False based on presense in underlying hashmap
+     * @param rideId {String}
+     * @return
+     */
+    public boolean isExists(String rideId){
+        if(allRidesDb.containsKey(rideId)){
+            return true;
+        }
+        return false;
+    }
 }

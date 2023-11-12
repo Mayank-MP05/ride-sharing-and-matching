@@ -46,4 +46,5 @@ public class Ride {
     public void generateBill(){
 
     }
+
 }

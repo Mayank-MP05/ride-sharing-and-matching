@@ -11,11 +11,13 @@ import com.example.geektrust.models.Ride;
 import com.example.geektrust.models.Rider;
 
 import com.example.geektrust.utils.Constants;
+import com.example.geektrust.utils.Logger;
 
 public class IOManager {
     private DriversDatabase driversDb;
     private RidersDatabase ridersDb;
     private RidesDatabase ridesDb;
+    private Logger logger;
 
 
     public IOManager() {
@@ -23,6 +25,7 @@ public class IOManager {
         driversDb = new DriversDatabase();
         ridersDb = new RidersDatabase();
         ridesDb = new RidesDatabase();
+        logger = new Logger();
     }
 
     public void processInputLine(String inputLine){
@@ -82,9 +85,27 @@ public class IOManager {
     }
 
     private void startRideCommand(String rideId, Integer matchNumToAccept, String riderId) {
+        // DOCS: Checking if rideId already exists case
+        if(ridesDb.isExists(rideId)){
+            logger.log("INVALID_RIDE");
+            return;
+        }
+
+        Rider riderObj = ridersDb.getRiderById(riderId);
+        if(!riderObj.isValidMatchNum(matchNumToAccept)){
+            logger.log("INVALID_RIDE");
+            return;
+        }
+
+        Ride newRide = new Ride(rideId);
+        String driverId = riderObj.getDriverId(matchNumToAccept);
+        newRide.startRide(riderId,driverId);
+
+        logger.log("RIDE_STARTED " + rideId);
     }
 
     private void matchCommand(String riderId) {
+
     }
 
     private void addRiderCommand(String riderId, Integer xCord, Integer yCord) {

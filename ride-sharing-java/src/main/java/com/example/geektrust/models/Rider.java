@@ -1,5 +1,8 @@
 package com.example.geektrust.models;
 
+import com.example.geektrust.utils.Constants;
+import jdk.vm.ci.meta.Constant;
+
 import java.util.ArrayList;
 
 public class Rider {
@@ -15,5 +18,31 @@ public class Rider {
         this.riderId = riderId;
         this.xCord = xCord;
         this.yCord = yCord;
+    }
+
+    public ArrayList<String> getMatchesArr(){
+        return driverIdMatched;
+    }
+
+    /**
+     * Checks if matchNum passed is valid for accepting based on min-max range and simply match arr size
+     * @param matchNumToAccept
+     * @return
+     */
+    public boolean isValidMatchNum(Integer matchNumToAccept){
+        if(Constants.MIN_MATCHES <= matchNumToAccept && Constants.MAX_MATCHES >= matchNumToAccept){
+            if(driverIdMatched.size() >= matchNumToAccept){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getDriverId(Integer matchNumToAccept){
+        if(isValidMatchNum(matchNumToAccept)){
+            return driverIdMatched.get(matchNumToAccept - 1);
+        }
+        String emptyResponse = "";
+        return emptyResponse;
     }
 }
