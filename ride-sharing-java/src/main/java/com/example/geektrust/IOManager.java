@@ -80,6 +80,22 @@ public class IOManager {
     }
 
     private void billCommand(String rideId) {
+        Ride rideObj = ridesDb.getRideById(rideId);
+        // DOCS: Checking if rideId do not exist case
+        if(!ridesDb.isExists(rideId)){
+            logger.log("INVALID_RIDE");
+            return;
+        }
+
+        if(rideObj.getCurrentRideStatus() == RideStatus.START){
+            logger.log("RIDE_NOT_COMPLETED");
+            return;
+        }
+
+        // Output: BILL <RIDE_ID> <DRIVER_ID> <AMOUNT>
+        String driverId = rideObj.getRideDriverId();
+        Double amount = rideObj.generateBill();
+        logger.log("BILL "+rideId+" "+driverId+" "+amount);
     }
 
     private void stopRideCommand(String rideId, Integer destXCord, Integer destYCord, Integer timeTaken) {
