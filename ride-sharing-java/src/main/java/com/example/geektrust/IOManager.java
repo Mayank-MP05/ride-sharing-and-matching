@@ -88,6 +88,8 @@ public class IOManager {
     }
 
     private void addRiderCommand(String riderId, Integer xCord, Integer yCord) {
+        Rider riderObj = new Rider(riderId,xCord,yCord);
+        ridersDb.putRiderById(riderId, riderObj);
     }
 
     public void addDriverCommand(String driverId, Integer xCord, Integer yCord){
