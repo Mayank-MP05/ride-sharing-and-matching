@@ -7,8 +7,11 @@ public class Driver {
     private String driverId;
     private Integer xCord;
     private Integer yCord;
-
+    private Double distanceFromRider;
     private DriverStatus driverCurrentStatus;
+    public String getDriverId() {
+        return driverId;
+    }
 
     public Driver(String driverId, Integer xCord, Integer yCord) {
         this.driverId = driverId;
@@ -23,4 +26,20 @@ public class Driver {
         this.yCord = destYCord;
     }
 
+    public DriverStatus getDriverCurrentStatus() {
+        return driverCurrentStatus;
+    }
+
+    public void calculateDistanceFromRider(Integer riderXCord, Integer riderYCord){
+        double xCordDelta = riderXCord-xCord;
+        double yCordDelta = riderYCord-yCord;
+        double sumOfSquares = xCordDelta*xCordDelta + yCordDelta*yCordDelta;
+
+        double euclideanDistance = Math.sqrt(sumOfSquares);
+        this.distanceFromRider = euclideanDistance;
+    }
+
+    public double getDistanceFromRider(){
+        return this.distanceFromRider;
+    }
 }

@@ -14,6 +14,10 @@ import com.example.geektrust.utils.Constants;
 import com.example.geektrust.utils.Logger;
 import com.example.geektrust.utils.RideStatus;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 public class IOManager {
     private DriversDatabase driversDb;
     private RidersDatabase ridersDb;
@@ -22,7 +26,7 @@ public class IOManager {
 
 
     public IOManager() {
-        System.out.println("[INIT] IOManager");
+        // DOCS: Initiate all database starting state here
         driversDb = new DriversDatabase();
         ridersDb = new RidersDatabase();
         ridesDb = new RidesDatabase();
@@ -139,7 +143,38 @@ public class IOManager {
     }
 
     private void matchCommand(String riderId) {
+        // DOCS: Iterate over available drivers, pick only in Match radius area
+        ArrayList<Driver> availableDrivers = driversDb.getAvailableDrivers();
+        Rider riderObj = ridersDb.getRiderById(riderId);
+        PriorityQueue<Driver> driverQueueIncreasing = new PriorityQueue<>(Comparator.comparingDouble(Driver::getDistanceFromRider));
+        for(Driver driverObj: availableDrivers){
+            driverObj.calculateDistanceFromRider(riderObj.getXCord(), riderObj.getYCord());
+            if(driverObj.getDistanceFromRider() < Constants.MATCH_RADIUS){
+                driverQueueIncreasing.add(driverObj);
+            }
+        }
 
+        if(driverQueueIncreasing.size() == 0){
+            logger.log("NO_DRIVERS_AVAILABLE");
+            return;
+        }
+
+        ArrayList<String> matchArrToUpdate = new ArrayList<>();
+        Integer noOfDriversMatched = 0;
+        while(!driverQueueIncreasing.isEmpty()){
+            Driver nearestDriver = driverQueueIncreasing.poll();
+            noOfDriversMatched++;
+            matchArrToUpdate.add(nearestDriver.getDriverId());
+            if(noOfDriversMatched == Constants.MAX_DRIVERS_TO_MATCH){
+                break;
+            }
+        }
+        logger.log("DRIVERS_MATCHED ");
+        for(String driverId : matchArrToUpdate){
+            logger.log(driverId+" ");
+        }
+
+        riderObj.setDriverIdMatches(matchArrToUpdate);
     }
 
     private void addRiderCommand(String riderId, Integer xCord, Integer yCord) {

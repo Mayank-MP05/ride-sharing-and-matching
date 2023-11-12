@@ -29,4 +29,8 @@ public class Constants {
     public static final Double PER_MIN_FARE = 2.0;
     public static final Double SERVICE_TAX_IN_PERCENTAGE = 20.0;
 
+    // Match related settings
+    public static final Double MATCH_RADIUS = 5.0;
+    public static final Integer MAX_DRIVERS_TO_MATCH = 5;
+
 }

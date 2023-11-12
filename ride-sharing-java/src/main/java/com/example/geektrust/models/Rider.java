@@ -19,6 +19,13 @@ public class Rider {
         this.yCord = yCord;
     }
 
+    public Integer getXCord() {
+        return xCord;
+    }
+
+    public Integer getYCord() {
+        return yCord;
+    }
     public ArrayList<String> getMatchesArr(){
         return driverIdMatched;
     }
@@ -44,4 +51,9 @@ public class Rider {
         String emptyResponse = "";
         return emptyResponse;
     }
+
+    public void setDriverIdMatches(ArrayList<String> driverIdMatched ){
+        this.driverIdMatched = driverIdMatched;
+    }
+
 }
